@@ -30,7 +30,7 @@ CREATE TABLE SIM_Person
     salary           INTEGER ,
     status           VARCHAR2 (255) ,
     title            VARCHAR2 (255) ,
-    type             VARCHAR2 ,
+    type             VARCHAR2 (255),
     bonus            INTEGER ,
     rating           INTEGER ,
     SIM_dept_dept_id INTEGER
@@ -39,9 +39,11 @@ ALTER TABLE SIM_Person ADD CONSTRAINT SIM_Person_PK PRIMARY KEY ( person_id ) ;
 
 CREATE TABLE SIM_assignments
   (
+    assignment_id INTEGER NOT NULL,
     SIM_Person_person_id   INTEGER ,
     SIM_project_project_id INTEGER
   ) ;
+ALTER TABLE SIM_assignments ADD CONSTRAINT SIM_assignments_PK PRIMARY KEY ( assignment_id ) ;
 
 CREATE TABLE SIM_dept
   (
