@@ -15,6 +15,23 @@ select SIM_Person_seq.nextval into :new.person_id from dual;
 end; 
 /
 
+DROP SEQUENCE SIM_assignments_seq ; 
+create sequence SIM_assignments_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+DROP TRIGGER SIM_assignments_PK_trig 
+; 
+
+create or replace trigger SIM_assignments_PK_trig 
+before insert on SIM_assignments
+for each row 
+begin 
+select SIM_assignments_seq.nextval into :new.assignment_id from dual; 
+end; 
+/
+
 DROP SEQUENCE SIM_dept_seq ; 
 create sequence SIM_dept_seq 
 start with 100 
