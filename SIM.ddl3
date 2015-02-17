@@ -1,3 +1,83 @@
+DROP SEQUENCE SIM_Assignments_seq ; 
+create sequence SIM_Assignments_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+
+create or replace trigger SIM_Assignments_PK_trig 
+before insert on SIM_Assignments
+for each row 
+begin 
+select SIM_Assignments_seq.nextval into :new.assignment_id from dual; 
+end; 
+/
+alter table SIM_Assignments add created date ; 
+alter table SIM_Assignments add created_by VARCHAR2 (255) ; 
+alter table SIM_Assignments add row_version_number integer ; 
+alter table SIM_Assignments add updated date ; 
+alter table SIM_Assignments add updated_by VARCHAR2 (255) ; 
+/
+create or replace trigger SIM_Assignments_AUD_trig 
+before insert or update on SIM_Assignments 
+for each row 
+begin 
+  if inserting then 
+    :new.created := localtimestamp; 
+    :new.created_by := nvl(wwv_flow.g_user,user); 
+    :new.updated := localtimestamp; 
+    :new.updated_by := nvl(wwv_flow.g_user,user); 
+    :new.row_version_number := 1; 
+  elsif updating then 
+    :new.row_version_number := nvl(:old.row_version_number,1) + 1; 
+  end if; 
+  if inserting or updating then 
+    :new.updated := localtimestamp; 
+    :new.updated_by := nvl(wwv_flow.g_user,user); 
+  end if; 
+end; 
+/
+
+DROP SEQUENCE SIM_Dept_seq ; 
+create sequence SIM_Dept_seq 
+start with 100 
+increment by 1 
+nomaxvalue 
+;
+
+create or replace trigger SIM_Dept_PK_trig 
+before insert on SIM_Dept
+for each row 
+begin 
+select SIM_Dept_seq.nextval into :new.dept_id from dual; 
+end; 
+/
+alter table SIM_Dept add created date ; 
+alter table SIM_Dept add created_by VARCHAR2 (255) ; 
+alter table SIM_Dept add row_version_number integer ; 
+alter table SIM_Dept add updated date ; 
+alter table SIM_Dept add updated_by VARCHAR2 (255) ; 
+/
+create or replace trigger SIM_Dept_AUD_trig 
+before insert or update on SIM_Dept 
+for each row 
+begin 
+  if inserting then 
+    :new.created := localtimestamp; 
+    :new.created_by := nvl(wwv_flow.g_user,user); 
+    :new.updated := localtimestamp; 
+    :new.updated_by := nvl(wwv_flow.g_user,user); 
+    :new.row_version_number := 1; 
+  elsif updating then 
+    :new.row_version_number := nvl(:old.row_version_number,1) + 1; 
+  end if; 
+  if inserting or updating then 
+    :new.updated := localtimestamp; 
+    :new.updated_by := nvl(wwv_flow.g_user,user); 
+  end if; 
+end; 
+/
+
 DROP SEQUENCE SIM_Person_seq ; 
 create sequence SIM_Person_seq 
 start with 100 
@@ -38,28 +118,28 @@ begin
 end; 
 /
 
-DROP SEQUENCE SIM_assignments_seq ; 
-create sequence SIM_assignments_seq 
+DROP SEQUENCE SIM_Project_seq ; 
+create sequence SIM_Project_seq 
 start with 100 
 increment by 1 
 nomaxvalue 
 ;
 
-create or replace trigger SIM_assignments_PK_trig 
-before insert on SIM_assignments
+create or replace trigger SIM_Project_PK_trig 
+before insert on SIM_Project
 for each row 
 begin 
-select SIM_assignments_seq.nextval into :new.assignment_id from dual; 
+select SIM_Project_seq.nextval into :new.project_id from dual; 
 end; 
 /
-alter table SIM_assignments add created date ; 
-alter table SIM_assignments add created_by VARCHAR2 (255) ; 
-alter table SIM_assignments add row_version_number integer ; 
-alter table SIM_assignments add updated date ; 
-alter table SIM_assignments add updated_by VARCHAR2 (255) ; 
+alter table SIM_Project add created date ; 
+alter table SIM_Project add created_by VARCHAR2 (255) ; 
+alter table SIM_Project add row_version_number integer ; 
+alter table SIM_Project add updated date ; 
+alter table SIM_Project add updated_by VARCHAR2 (255) ; 
 /
-create or replace trigger SIM_assignments_AUD_trig 
-before insert or update on SIM_assignments 
+create or replace trigger SIM_Project_AUD_trig 
+before insert or update on SIM_Project 
 for each row 
 begin 
   if inserting then 
@@ -78,91 +158,15 @@ begin
 end; 
 /
 
-DROP SEQUENCE SIM_dept_seq ; 
-create sequence SIM_dept_seq 
-start with 100 
-increment by 1 
-nomaxvalue 
-;
-
-create or replace trigger SIM_dept_PK_trig 
-before insert on SIM_dept
-for each row 
-begin 
-select SIM_dept_seq.nextval into :new.dept_id from dual; 
-end; 
-/
-alter table SIM_dept add created date ; 
-alter table SIM_dept add created_by VARCHAR2 (255) ; 
-alter table SIM_dept add row_version_number integer ; 
-alter table SIM_dept add updated date ; 
-alter table SIM_dept add updated_by VARCHAR2 (255) ; 
-/
-create or replace trigger SIM_dept_AUD_trig 
-before insert or update on SIM_dept 
-for each row 
-begin 
-  if inserting then 
-    :new.created := localtimestamp; 
-    :new.created_by := nvl(wwv_flow.g_user,user); 
-    :new.updated := localtimestamp; 
-    :new.updated_by := nvl(wwv_flow.g_user,user); 
-    :new.row_version_number := 1; 
-  elsif updating then 
-    :new.row_version_number := nvl(:old.row_version_number,1) + 1; 
-  end if; 
-  if inserting or updating then 
-    :new.updated := localtimestamp; 
-    :new.updated_by := nvl(wwv_flow.g_user,user); 
-  end if; 
-end; 
-/
-
-DROP SEQUENCE SIM_project_seq ; 
-create sequence SIM_project_seq 
-start with 100 
-increment by 1 
-nomaxvalue 
-;
-
-create or replace trigger SIM_project_PK_trig 
-before insert on SIM_project
-for each row 
-begin 
-select SIM_project_seq.nextval into :new.project_id from dual; 
-end; 
-/
-alter table SIM_project add created date ; 
-alter table SIM_project add created_by VARCHAR2 (255) ; 
-alter table SIM_project add row_version_number integer ; 
-alter table SIM_project add updated date ; 
-alter table SIM_project add updated_by VARCHAR2 (255) ; 
-/
-create or replace trigger SIM_project_AUD_trig 
-before insert or update on SIM_project 
-for each row 
-begin 
-  if inserting then 
-    :new.created := localtimestamp; 
-    :new.created_by := nvl(wwv_flow.g_user,user); 
-    :new.updated := localtimestamp; 
-    :new.updated_by := nvl(wwv_flow.g_user,user); 
-    :new.row_version_number := 1; 
-  elsif updating then 
-    :new.row_version_number := nvl(:old.row_version_number,1) + 1; 
-  end if; 
-  if inserting or updating then 
-    :new.updated := localtimestamp; 
-    :new.updated_by := nvl(wwv_flow.g_user,user); 
-  end if; 
-end; 
-/
-
-DROP INDEX SIM_dept_dept_id_FK_0 ;
-CREATE INDEX SIM_dept_dept_id_FK_0 ON SIM_Person(SIM_dept_dept_id) ;
-DROP INDEX SIM_Person_person_id_FK_1 ;
-CREATE INDEX SIM_Person_person_id_FK_1 ON SIM_assignments(SIM_Person_person_id) ;
-DROP INDEX SIM_project_project_id_FK_2 ;
-CREATE INDEX SIM_project_project_id_FK_2 ON SIM_assignments(SIM_project_project_id) ;
-DROP INDEX SIM_dept_dept_id_FK_3 ;
-CREATE INDEX SIM_dept_dept_id_FK_3 ON SIM_project(SIM_dept_dept_id) ;
+DROP INDEX SIM_Person_person_id_FK_0 ;
+CREATE INDEX SIM_Person_person_id_FK_0 ON SIM_Assignments(SIM_Person_person_id) ;
+DROP INDEX SIM_Project_project_id_FK_1 ;
+CREATE INDEX SIM_Project_project_id_FK_1 ON SIM_Assignments(SIM_Project_project_id) ;
+DROP INDEX SIM_Person_person_id_FK_2 ;
+CREATE INDEX SIM_Person_person_id_FK_2 ON SIM_Dept(SIM_Person_person_id) ;
+DROP INDEX SIM_Dept_dept_id_FK_3 ;
+CREATE INDEX SIM_Dept_dept_id_FK_3 ON SIM_Person(SIM_Dept_dept_id) ;
+DROP INDEX SIM_Dept_dept_id1_FK_4 ;
+CREATE INDEX SIM_Dept_dept_id1_FK_4 ON SIM_Person(SIM_Dept_dept_id1) ;
+DROP INDEX SIM_Dept_dept_id_FK_5 ;
+CREATE INDEX SIM_Dept_dept_id_FK_5 ON SIM_Project(SIM_Dept_dept_id) ;
