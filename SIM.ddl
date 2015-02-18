@@ -16,9 +16,9 @@ DROP TABLE SIM_Project CASCADE CONSTRAINTS ;
 
 CREATE TABLE SIM_Assignments
   (
+    assignment_id          INTEGER NOT NULL ,
     SIM_Person_person_id   INTEGER ,
-    SIM_Project_project_id INTEGER ,
-    assignment_id          INTEGER NOT NULL
+    SIM_Project_project_id INTEGER 
   ) ;
 ALTER TABLE SIM_Assignments ADD CONSTRAINT SIM_Assignments_PK PRIMARY KEY ( assignment_id ) ;
 
@@ -52,7 +52,7 @@ CREATE TABLE SIM_Person
     salary            INTEGER ,
     status            VARCHAR2 (255) ,
     title             VARCHAR2 (255) ,
-    type              VARCHAR2 ,
+    type              VARCHAR2 (255),
     bonus             INTEGER ,
     rating            INTEGER ,
     SIM_Dept_dept_id  INTEGER ,
