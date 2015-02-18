@@ -27,7 +27,7 @@ prompt APPLICATION 11645 - SIM 347
 -- Application Export:
 --   Application:     11645
 --   Name:            SIM 347
---   Date and Time:   00:20 Sunday February 15, 2015
+--   Date and Time:   02:32 Wednesday February 18, 2015
 --   Exported By:     CASSIE@CS.UTEXAS.EDU
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -40,7 +40,7 @@ prompt APPLICATION 11645 - SIM 347
 --     Items:                   41
 --     Processes:               20
 --     Regions:                 23
---     Buttons:                 25
+--     Buttons:                 30
 --     Dynamic Actions:         15
 --   Shared Components:
 --     Logic:
@@ -62,7 +62,7 @@ prompt APPLICATION 11645 - SIM 347
 --         Breadcrumb:           1
 --         Button:               3
 --         Report:               8
---       LOVs:                   3
+--       LOVs:                   4
 --       Shortcuts:              1
 --     Globalization:
 --     Reports:
@@ -107,7 +107,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150215001907'
+,p_last_upd_yyyymmddhh24miss=>'20150218023027'
 ,p_ui_type_name => null
 );
 end;
@@ -282,6 +282,18 @@ wwv_flow_api.create_list_of_values(
 'select name as d,',
 '        project_id as r',
 '  from SIM_project',
+' order by 1'))
+);
+wwv_flow_api.create_list_of_values(
+ p_id=>wwv_flow_api.id(605748603029464357)
+,p_lov_name=>'UNMANAGED DEPARTMENT DROP DOWN'
+,p_lov_query=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
+'select SIM_dept.name as d,',
+'       SIM_dept.dept_id as r',
+'  from SIM_dept',
+'left join SIM_Person',
+'on SIM_dept.dept_id = SIM_Person.SIM_dept_dept_id1',
+'where SIM_Person.person_id IS NULL',
 ' order by 1'))
 );
 end;
@@ -7491,7 +7503,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150214231451'
+,p_last_upd_yyyymmddhh24miss=>'20150218022809'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545478400219559373)
@@ -7533,7 +7545,7 @@ wwv_flow_api.create_page_plug(
 '       TYPE,',
 '       BONUS,',
 '       RATING,',
-'       SIM_DEPT_DEPT_ID',
+'       COALESCE(SIM_DEPT_DEPT_ID1, SIM_DEPT_DEPT_ID) AS DEPT_ID',
 '  from SIM_PERSON'))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
@@ -7716,11 +7728,11 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545531591161576587)
-,p_db_column_name=>'SIM_DEPT_DEPT_ID'
+ p_id=>wwv_flow_api.id(608694450783652267)
+,p_db_column_name=>'DEPT_ID'
 ,p_display_order=>18
 ,p_column_identifier=>'R'
-,p_column_label=>'Sim Dept Dept Id'
+,p_column_label=>'Dept Id'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
 ,p_tz_dependent=>'N'
@@ -7733,7 +7745,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'PERSON_ID:NAME:SSNUM:GENDER:BIRTH_DATE:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:TYPE:BONUS:RATING:SIM_DEPT_DEPT_ID'
+,p_report_columns=>'PERSON_ID:NAME:SSNUM:GENDER:BIRTH_DATE:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:TYPE:BONUS:RATING:DEPT_ID'
 ,p_flashback_enabled=>'N'
 );
 end;
@@ -7755,7 +7767,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150214232158'
+,p_last_upd_yyyymmddhh24miss=>'20150218013302'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545557322047590736)
@@ -7796,7 +7808,7 @@ wwv_flow_api.create_page_plug(
 '"STATUS",',
 '"TITLE",',
 '"BONUS",',
-'"SIM_DEPT_DEPT_ID"',
+'"SIM_DEPT_DEPT_ID1"',
 'from "#OWNER#"."SIM_MANAGER" ',
 '  ',
 ''))
@@ -7965,12 +7977,13 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545596913447610861)
-,p_db_column_name=>'SIM_DEPT_DEPT_ID'
+ p_id=>wwv_flow_api.id(604596809751321627)
+,p_db_column_name=>'SIM_DEPT_DEPT_ID1'
 ,p_display_order=>17
 ,p_column_identifier=>'Q'
-,p_column_label=>'Sim Dept Dept Id'
+,p_column_label=>'Sim Dept Dept Id1'
 ,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_rpt(
@@ -7981,7 +7994,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'PERSON_ID:TYPE:NAME:BIRTH_DATE:SSNUM:GENDER:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:BONUS:SIM_DEPT_DEPT_ID'
+,p_report_columns=>'PERSON_ID:TYPE:NAME:BIRTH_DATE:SSNUM:GENDER:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:BONUS:SIM_DEPT_DEPT_ID1'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -8058,7 +8071,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150215000040'
+,p_last_upd_yyyymmddhh24miss=>'20150218020714'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545577525849610835)
@@ -8085,6 +8098,21 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'TEXT'
 ,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(605311797903441772)
+,p_button_sequence=>171
+,p_button_plug_id=>wwv_flow_api.id(545577525849610835)
+,p_button_name=>'P5_CREATE_DEPT'
+,p_button_static_id=>'P5_CREATE_DEPT'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_id=>wwv_flow_api.id(545468626171549809)
+,p_button_image_alt=>'Create New Department'
+,p_button_position=>'BODY'
+,p_button_redirect_url=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(545578685917610836)
@@ -8448,14 +8476,17 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(545577525849610835)
 ,p_use_cache_before_default=>'NO'
 ,p_prompt=>'Sim Dept Dept Id'
-,p_source=>'SIM_DEPT_DEPT_ID'
+,p_source=>'SIM_DEPT_DEPT_ID1'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_named_lov=>'DEPARTMENT DROP DOWN'
+,p_named_lov=>'UNMANAGED DEPARTMENT DROP DOWN'
 ,p_lov=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select name as d,',
-'       dept_id as r',
+'select SIM_dept.name as d,',
+'       SIM_dept.dept_id as r',
 '  from SIM_dept',
+'left join SIM_Person',
+'on SIM_dept.dept_id = SIM_Person.SIM_dept_dept_id1',
+'where SIM_Person.person_id IS NULL',
 ' order by 1'))
 ,p_cSize=>32
 ,p_cMaxlength=>255
@@ -8842,7 +8873,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150214235450'
+,p_last_upd_yyyymmddhh24miss=>'20150218021307'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545621717520646579)
@@ -8869,6 +8900,21 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'TEXT'
 ,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(608213192075561357)
+,p_button_sequence=>161
+,p_button_plug_id=>wwv_flow_api.id(545621717520646579)
+,p_button_name=>'P7_CREATE_DEPT'
+,p_button_static_id=>'P7_CREATE_DEPT'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_id=>wwv_flow_api.id(545468626171549809)
+,p_button_image_alt=>'Create New Department'
+,p_button_position=>'BODY'
+,p_button_redirect_url=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(545622846483646580)
@@ -9496,7 +9542,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150215000157'
+,p_last_upd_yyyymmddhh24miss=>'20150218021857'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545655112756664098)
@@ -9523,6 +9569,22 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'TEXT'
 ,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(608465312790575946)
+,p_button_sequence=>31
+,p_button_plug_id=>wwv_flow_api.id(545655112756664098)
+,p_button_name=>'P9_CREATE_DEPT'
+,p_button_static_id=>'P9_CREATE_DEPT'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_id=>wwv_flow_api.id(545468626171549809)
+,p_button_image_alt=>'Create New Department'
+,p_button_position=>'BODY'
+,p_button_alignment=>'LEFT'
+,p_button_redirect_url=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(545656296307664099)
@@ -9730,7 +9792,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150214233242'
+,p_last_upd_yyyymmddhh24miss=>'20150218023027'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545669645358674032)
@@ -9770,14 +9832,17 @@ wwv_flow_api.create_worksheet(
 ,p_max_row_count=>'1000000'
 ,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
 ,p_no_data_found_message=>'No data found.'
+,p_allow_report_categories=>'N'
 ,p_show_nulls_as=>'-'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
 ,p_report_list_mode=>'TABS'
 ,p_show_detail_link=>'C'
+,p_show_calendar=>'N'
 ,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
-,p_detail_link=>'f?p=&APP_ID.:11:&APP_SESSION.::::P11_DEPT_ID:#DEPT_ID#'
+,p_detail_link=>'f?p=&APP_ID.:11:&SESSION.::&DEBUG.::P11_DEPT_ID:#DEPT_ID#'
 ,p_detail_link_text=>'<img src="#IMAGE_PREFIX#menu/pencil16x16.gif"  border="0">'
+,p_icon_view_columns_per_row=>1
 ,p_owner=>'CASSIE@CS.UTEXAS.EDU'
 ,p_internal_uid=>545680239847683729
 );
@@ -10285,7 +10350,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150215001907'
+,p_last_upd_yyyymmddhh24miss=>'20150218022114'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545814907083793574)
@@ -10312,6 +10377,38 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_01=>'N'
 ,p_attribute_02=>'TEXT'
 ,p_attribute_03=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(608527621486605503)
+,p_button_sequence=>21
+,p_button_plug_id=>wwv_flow_api.id(545814907083793574)
+,p_button_name=>'P14_CREATE_PERSON'
+,p_button_static_id=>'P14_CREATE_PERSON'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_id=>wwv_flow_api.id(545468626171549809)
+,p_button_image_alt=>'Create New Person'
+,p_button_position=>'BODY'
+,p_button_alignment=>'LEFT'
+,p_button_redirect_url=>'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+,p_grid_new_row=>'Y'
+,p_grid_new_column=>'Y'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(608529941368610859)
+,p_button_sequence=>31
+,p_button_plug_id=>wwv_flow_api.id(545814907083793574)
+,p_button_name=>'P14_CREATE_PROJECT'
+,p_button_static_id=>'P14_CREATE_PROJECT'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_id=>wwv_flow_api.id(545468626171549809)
+,p_button_image_alt=>'Create New Project'
+,p_button_position=>'BODY'
+,p_button_alignment=>'LEFT'
+,p_button_redirect_url=>'f?p=&APP_ID.:9:&SESSION.::&DEBUG.:::'
+,p_grid_new_grid=>false
+,p_grid_new_row=>'Y'
+,p_grid_new_column=>'Y'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(545816031724793575)
