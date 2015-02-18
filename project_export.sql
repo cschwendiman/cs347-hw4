@@ -22,12 +22,12 @@ end;
 /
 prompt --application/set_environment
  
-prompt APPLICATION 11645 - SIM 347
+prompt APPLICATION 11645 - CS347 HW4
 --
 -- Application Export:
 --   Application:     11645
---   Name:            SIM 347
---   Date and Time:   03:07 Wednesday February 18, 2015
+--   Name:            CS347 HW4
+--   Date and Time:   03:29 Wednesday February 18, 2015
 --   Exported By:     CASSIE@CS.UTEXAS.EDU
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -84,8 +84,8 @@ wwv_flow_api.create_flow(
  p_id=>wwv_flow.g_flow_id
 ,p_display_id=>nvl(wwv_flow_application_install.get_application_id,11645)
 ,p_owner=>nvl(wwv_flow_application_install.get_schema,'CS347CASSIE')
-,p_name=>nvl(wwv_flow_application_install.get_application_name,'SIM 347')
-,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'F_11645')
+,p_name=>nvl(wwv_flow_application_install.get_application_name,'CS347 HW4')
+,p_alias=>nvl(wwv_flow_application_install.get_application_alias,'CS347_HW4')
 ,p_page_view_logging=>'YES'
 ,p_page_protection_enabled_y_n=>'Y'
 ,p_checksum_salt=>'586152C7412CF9706056363E0E54C3BEA1E6BE866BE9164FF964B75018E8C942'
@@ -101,13 +101,14 @@ wwv_flow_api.create_flow(
 ,p_proxy_server=> nvl(wwv_flow_application_install.get_proxy,'')
 ,p_flow_version=>'release 1.0'
 ,p_flow_status=>'AVAILABLE_W_EDIT_LINK'
+,p_flow_unavailable_text=>'This application is currently unavailable at this time.'
 ,p_exact_substitutions_only=>'Y'
 ,p_browser_cache=>'N'
 ,p_browser_frame=>'D'
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218030544'
+,p_last_upd_yyyymmddhh24miss=>'20150218032843'
 ,p_ui_type_name => null
 );
 end;
@@ -7503,7 +7504,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218030047'
+,p_last_upd_yyyymmddhh24miss=>'20150218032545'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545478400219559373)
@@ -7530,7 +7531,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select PERSON_ID,',
 '       TYPE,',
-'       NAME,',
+'       SIM_PERSON.NAME,',
 '       SSNUM,',
 '       GENDER,',
 '       BIRTH_DATE,',
@@ -7545,8 +7546,10 @@ wwv_flow_api.create_page_plug(
 '       TITLE,',
 '       BONUS,',
 '       RATING,',
-'       COALESCE(SIM_DEPT_DEPT_ID1, SIM_DEPT_DEPT_ID) AS DEPT_ID',
-'  from SIM_PERSON'))
+'       SIM_DEPT.NAME AS "Department"',
+'  from SIM_PERSON, SIM_DEPT',
+'WHERE SIM_DEPT.DEPT_ID = COALESCE(SIM_DEPT_DEPT_ID1, SIM_DEPT_DEPT_ID)',
+''))
 ,p_plug_source_type=>'NATIVE_IR'
 ,p_plug_query_row_template=>1
 ,p_plug_query_show_nulls_as=>' - '
@@ -7742,13 +7745,13 @@ wwv_flow_api.create_worksheet_column(
 ,p_column_alignment=>'RIGHT'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(608694450783652267)
-,p_db_column_name=>'DEPT_ID'
-,p_display_order=>171
+ p_id=>wwv_flow_api.id(611634787450010807)
+,p_db_column_name=>'Department'
+,p_display_order=>162
 ,p_column_identifier=>'R'
-,p_column_label=>'Dept Id'
-,p_column_type=>'NUMBER'
-,p_column_alignment=>'RIGHT'
+,p_column_label=>'Department'
+,p_column_type=>'STRING'
+,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(545531937092577102)
@@ -7758,7 +7761,8 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'PERSON_ID:NAME:SSNUM:GENDER:BIRTH_DATE:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:TYPE:BONUS:RATING:DEPT_ID'
+,p_view_mode=>'REPORT'
+,p_report_columns=>'PERSON_ID:TYPE:NAME:SSNUM:GENDER:BIRTH_DATE:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:BONUS:RATING:Department'
 ,p_flashback_enabled=>'N'
 );
 end;
