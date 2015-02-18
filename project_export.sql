@@ -27,7 +27,7 @@ prompt APPLICATION 11645 - CS347 HW4
 -- Application Export:
 --   Application:     11645
 --   Name:            CS347 HW4
---   Date and Time:   03:29 Wednesday February 18, 2015
+--   Date and Time:   04:01 Wednesday February 18, 2015
 --   Exported By:     CASSIE@CS.UTEXAS.EDU
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -108,7 +108,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218032843'
+,p_last_upd_yyyymmddhh24miss=>'20150218035528'
 ,p_ui_type_name => null
 );
 end;
@@ -8078,7 +8078,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218020714'
+,p_last_upd_yyyymmddhh24miss=>'20150218035302'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545577525849610835)
@@ -8482,7 +8482,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>170
 ,p_item_plug_id=>wwv_flow_api.id(545577525849610835)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'Sim Dept Dept Id'
+,p_prompt=>'Department'
 ,p_source=>'SIM_DEPT_DEPT_ID1'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
@@ -8881,7 +8881,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218021307'
+,p_last_upd_yyyymmddhh24miss=>'20150218035232'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545621717520646579)
@@ -9285,7 +9285,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>160
 ,p_item_plug_id=>wwv_flow_api.id(545621717520646579)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'Sim Dept Dept Id'
+,p_prompt=>'Department'
 ,p_source=>'SIM_DEPT_DEPT_ID'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
@@ -9551,7 +9551,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218021857'
+,p_last_upd_yyyymmddhh24miss=>'20150218035326'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545655112756664098)
@@ -9699,7 +9699,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_api.id(545655112756664098)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'Sim Dept Dept Id'
+,p_prompt=>'Department'
 ,p_source=>'SIM_DEPT_DEPT_ID'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
@@ -10196,7 +10196,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218030544'
+,p_last_upd_yyyymmddhh24miss=>'20150218035000'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545687953686690863)
@@ -10222,6 +10222,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select ',
+'assignment_id,',
 'SIM_PERSON."NAME" AS "Employee Name",',
 'SIM_PROJECT."NAME" AS "Project Name"',
 'from "#OWNER#"."SIM_ASSIGNMENTS" , SIM_PROJECT, SIM_PERSON',
@@ -10238,14 +10239,17 @@ wwv_flow_api.create_worksheet(
 ,p_max_row_count=>'1000000'
 ,p_max_row_count_message=>'The maximum row count for this report is #MAX_ROW_COUNT# rows.  Please apply a filter to reduce the number of records in your query.'
 ,p_no_data_found_message=>'No data found.'
+,p_allow_report_categories=>'N'
 ,p_show_nulls_as=>'-'
 ,p_pagination_type=>'ROWS_X_TO_Y'
 ,p_pagination_display_pos=>'BOTTOM_RIGHT'
 ,p_report_list_mode=>'TABS'
 ,p_show_detail_link=>'C'
+,p_show_calendar=>'N'
 ,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
-,p_detail_link=>'f?p=&APP_ID.:14:&APP_SESSION.::::P14_ASSIGNMENT_ID:#ASSIGNMENT_ID#'
+,p_detail_link=>'f?p=&APP_ID.:14:&SESSION.::&DEBUG.::P14_ASSIGNMENT_ID:#ASSIGNMENT_ID#'
 ,p_detail_link_text=>'<img src="#IMAGE_PREFIX#menu/pencil16x16.gif"  border="0">'
+,p_icon_view_columns_per_row=>1
 ,p_owner=>'CASSIE@CS.UTEXAS.EDU'
 ,p_internal_uid=>545821981913793588
 );
@@ -10267,6 +10271,17 @@ wwv_flow_api.create_worksheet_column(
 ,p_column_type=>'STRING'
 ,p_tz_dependent=>'N'
 );
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(612480958701140837)
+,p_db_column_name=>'ASSIGNMENT_ID'
+,p_display_order=>4
+,p_column_identifier=>'D'
+,p_column_label=>'Assignment Id'
+,p_column_type=>'NUMBER'
+,p_display_text_as=>'HIDDEN'
+,p_column_alignment=>'RIGHT'
+,p_tz_dependent=>'N'
+);
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(545825501156794150)
 ,p_application_user=>'APXWS_DEFAULT'
@@ -10275,7 +10290,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'Employee Name:Project Name'
+,p_report_columns=>'Employee Name:Project Name:ASSIGNMENT_ID'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -10352,7 +10367,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218022114'
+,p_last_upd_yyyymmddhh24miss=>'20150218035528'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545814907083793574)
@@ -10388,7 +10403,7 @@ wwv_flow_api.create_page_button(
 ,p_button_static_id=>'P14_CREATE_PERSON'
 ,p_button_action=>'REDIRECT_PAGE'
 ,p_button_template_id=>wwv_flow_api.id(545468626171549809)
-,p_button_image_alt=>'Create New Person'
+,p_button_image_alt=>'Create New Employee'
 ,p_button_position=>'BODY'
 ,p_button_alignment=>'LEFT'
 ,p_button_redirect_url=>'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:::'
@@ -10495,7 +10510,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_api.id(545814907083793574)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'Sim Person Person Id'
+,p_prompt=>'Employee'
 ,p_source=>'SIM_PERSON_PERSON_ID'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
@@ -10522,7 +10537,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_api.id(545814907083793574)
 ,p_use_cache_before_default=>'NO'
-,p_prompt=>'Sim Project Project Id'
+,p_prompt=>'Project'
 ,p_source=>'SIM_PROJECT_PROJECT_ID'
 ,p_source_type=>'DB_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'

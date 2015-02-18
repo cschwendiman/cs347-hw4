@@ -77,6 +77,8 @@ ALTER TABLE SIM_Assignments ADD CONSTRAINT SIM_Assignments_SIM_Person_FK FOREIGN
 
 ALTER TABLE SIM_Assignments ADD CONSTRAINT SIM_Assignments_SIM_Project_FK FOREIGN KEY ( SIM_Project_project_id ) REFERENCES SIM_Project ( project_id ) ;
 
+ALTER TABLE SIM_Assignments ADD CONSTRAINT SIM_Assignments_UNIQUE_ROWS UNIQUE ( SIM_Person_person_id, SIM_Project_project_id ) ;
+
 ALTER TABLE SIM_Dept ADD CONSTRAINT SIM_Dept_SIM_Person_FK FOREIGN KEY ( SIM_Person_person_id ) REFERENCES SIM_Person ( person_id ) ;
 
 ALTER TABLE SIM_Person ADD CONSTRAINT SIM_Person_SIM_Dept_FK FOREIGN KEY ( SIM_Dept_dept_id ) REFERENCES SIM_Dept ( dept_id ) ;
