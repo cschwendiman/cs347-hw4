@@ -27,7 +27,7 @@ prompt APPLICATION 11645 - SIM 347
 -- Application Export:
 --   Application:     11645
 --   Name:            SIM 347
---   Date and Time:   02:32 Wednesday February 18, 2015
+--   Date and Time:   03:07 Wednesday February 18, 2015
 --   Exported By:     CASSIE@CS.UTEXAS.EDU
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -107,7 +107,7 @@ wwv_flow_api.create_flow(
 ,p_rejoin_existing_sessions=>'N'
 ,p_csv_encoding=>'Y'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218023027'
+,p_last_upd_yyyymmddhh24miss=>'20150218030544'
 ,p_ui_type_name => null
 );
 end;
@@ -7503,7 +7503,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218022809'
+,p_last_upd_yyyymmddhh24miss=>'20150218030047'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545478400219559373)
@@ -7529,6 +7529,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select PERSON_ID,',
+'       TYPE,',
 '       NAME,',
 '       SSNUM,',
 '       GENDER,',
@@ -7542,7 +7543,6 @@ wwv_flow_api.create_page_plug(
 '       SALARY,',
 '       STATUS,',
 '       TITLE,',
-'       TYPE,',
 '       BONUS,',
 '       RATING,',
 '       COALESCE(SIM_DEPT_DEPT_ID1, SIM_DEPT_DEPT_ID) AS DEPT_ID',
@@ -7551,6 +7551,35 @@ wwv_flow_api.create_page_plug(
 ,p_plug_query_row_template=>1
 ,p_plug_query_show_nulls_as=>' - '
 ,p_pagination_display_position=>'BOTTOM_RIGHT'
+,p_prn_output_show_link=>'Y'
+,p_prn_content_disposition=>'ATTACHMENT'
+,p_prn_document_header=>'APEX'
+,p_prn_units=>'INCHES'
+,p_prn_paper_size=>'LETTER'
+,p_prn_width=>11
+,p_prn_height=>8.5
+,p_prn_orientation=>'HORIZONTAL'
+,p_prn_page_header_font_color=>'#000000'
+,p_prn_page_header_font_family=>'Helvetica'
+,p_prn_page_header_font_weight=>'normal'
+,p_prn_page_header_font_size=>'12'
+,p_prn_page_footer_font_color=>'#000000'
+,p_prn_page_footer_font_family=>'Helvetica'
+,p_prn_page_footer_font_weight=>'normal'
+,p_prn_page_footer_font_size=>'12'
+,p_prn_header_bg_color=>'#9bafde'
+,p_prn_header_font_color=>'#ffffff'
+,p_prn_header_font_family=>'Helvetica'
+,p_prn_header_font_weight=>'normal'
+,p_prn_header_font_size=>'10'
+,p_prn_body_bg_color=>'#efefef'
+,p_prn_body_font_color=>'#000000'
+,p_prn_body_font_family=>'Helvetica'
+,p_prn_body_font_weight=>'normal'
+,p_prn_body_font_size=>'10'
+,p_prn_border_width=>.5
+,p_prn_page_header_alignment=>'CENTER'
+,p_prn_page_footer_alignment=>'CENTER'
 );
 wwv_flow_api.create_worksheet(
  p_id=>wwv_flow_api.id(545524418163576579)
@@ -7578,37 +7607,42 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(545530362125576586)
+,p_db_column_name=>'TYPE'
+,p_display_order=>11
+,p_column_identifier=>'O'
+,p_column_label=>'Type'
+,p_column_type=>'STRING'
+);
+wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545525117619576581)
 ,p_db_column_name=>'NAME'
-,p_display_order=>2
+,p_display_order=>21
 ,p_column_identifier=>'B'
 ,p_column_label=>'Name'
 ,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545525568932576582)
 ,p_db_column_name=>'SSNUM'
-,p_display_order=>3
+,p_display_order=>31
 ,p_column_identifier=>'C'
 ,p_column_label=>'Ssnum'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545525991162576582)
 ,p_db_column_name=>'GENDER'
-,p_display_order=>4
+,p_display_order=>41
 ,p_column_identifier=>'D'
 ,p_column_label=>'Gender'
 ,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545526375787576583)
 ,p_db_column_name=>'BIRTH_DATE'
-,p_display_order=>5
+,p_display_order=>51
 ,p_column_identifier=>'E'
 ,p_column_label=>'Birth Date'
 ,p_column_type=>'DATE'
@@ -7617,125 +7651,104 @@ wwv_flow_api.create_worksheet_column(
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545526759836576583)
 ,p_db_column_name=>'ADDRESS'
-,p_display_order=>6
+,p_display_order=>61
 ,p_column_identifier=>'F'
 ,p_column_label=>'Address'
 ,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545527118773576583)
 ,p_db_column_name=>'CITY'
-,p_display_order=>7
+,p_display_order=>71
 ,p_column_identifier=>'G'
 ,p_column_label=>'City'
 ,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545527586644576584)
 ,p_db_column_name=>'STATE'
-,p_display_order=>8
+,p_display_order=>81
 ,p_column_identifier=>'H'
 ,p_column_label=>'State'
 ,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545527943470576584)
 ,p_db_column_name=>'ZIP'
-,p_display_order=>9
+,p_display_order=>91
 ,p_column_identifier=>'I'
 ,p_column_label=>'Zip'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545528368809576584)
 ,p_db_column_name=>'EMP_ID'
-,p_display_order=>10
+,p_display_order=>101
 ,p_column_identifier=>'J'
 ,p_column_label=>'Emp Id'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545528722540576585)
 ,p_db_column_name=>'HIRE_DATE'
-,p_display_order=>11
+,p_display_order=>111
 ,p_column_identifier=>'K'
 ,p_column_label=>'Hire Date'
 ,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545529103579576585)
 ,p_db_column_name=>'SALARY'
-,p_display_order=>12
+,p_display_order=>121
 ,p_column_identifier=>'L'
 ,p_column_label=>'Salary'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545529593292576585)
 ,p_db_column_name=>'STATUS'
-,p_display_order=>13
+,p_display_order=>131
 ,p_column_identifier=>'M'
 ,p_column_label=>'Status'
 ,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545529975098576586)
 ,p_db_column_name=>'TITLE'
-,p_display_order=>14
+,p_display_order=>141
 ,p_column_identifier=>'N'
 ,p_column_label=>'Title'
 ,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545530362125576586)
-,p_db_column_name=>'TYPE'
-,p_display_order=>15
-,p_column_identifier=>'O'
-,p_column_label=>'Type'
-,p_column_type=>'STRING'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545530794157576586)
 ,p_db_column_name=>'BONUS'
-,p_display_order=>16
+,p_display_order=>151
 ,p_column_identifier=>'P'
 ,p_column_label=>'Bonus'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(545531152565576587)
 ,p_db_column_name=>'RATING'
-,p_display_order=>17
+,p_display_order=>161
 ,p_column_identifier=>'Q'
 ,p_column_label=>'Rating'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
  p_id=>wwv_flow_api.id(608694450783652267)
 ,p_db_column_name=>'DEPT_ID'
-,p_display_order=>18
+,p_display_order=>171
 ,p_column_identifier=>'R'
 ,p_column_label=>'Dept Id'
 ,p_column_type=>'NUMBER'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(545531937092577102)
@@ -7767,7 +7780,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150218013302'
+,p_last_upd_yyyymmddhh24miss=>'20150218025748'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545557322047590736)
@@ -7793,8 +7806,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select "PERSON_ID", ',
-'"TYPE",',
-'"NAME",',
+'SIM_MANAGER."NAME",',
 '"BIRTH_DATE",',
 '"SSNUM",',
 '"GENDER",',
@@ -7808,8 +7820,9 @@ wwv_flow_api.create_page_plug(
 '"STATUS",',
 '"TITLE",',
 '"BONUS",',
-'"SIM_DEPT_DEPT_ID1"',
-'from "#OWNER#"."SIM_MANAGER" ',
+'SIM_DEPT."NAME" AS "Department"',
+'from "#OWNER#"."SIM_MANAGER" , SIM_DEPT',
+'WHERE SIM_MANAGER.SIM_DEPT_DEPT_ID1 = SIM_DEPT.DEPT_ID',
 '  ',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
@@ -7839,15 +7852,6 @@ wwv_flow_api.create_worksheet_column(
 ,p_column_identifier=>'A'
 ,p_column_label=>'Person Id'
 ,p_column_type=>'NUMBER'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545590973832610855)
-,p_db_column_name=>'TYPE'
-,p_display_order=>2
-,p_column_identifier=>'B'
-,p_column_label=>'Type'
-,p_column_type=>'STRING'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
@@ -7977,13 +7981,12 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(604596809751321627)
-,p_db_column_name=>'SIM_DEPT_DEPT_ID1'
+ p_id=>wwv_flow_api.id(610463710784830181)
+,p_db_column_name=>'Department'
 ,p_display_order=>17
 ,p_column_identifier=>'Q'
-,p_column_label=>'Sim Dept Dept Id1'
-,p_column_type=>'NUMBER'
-,p_column_alignment=>'RIGHT'
+,p_column_label=>'Department'
+,p_column_type=>'STRING'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_rpt(
@@ -7994,7 +7997,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'PERSON_ID:TYPE:NAME:BIRTH_DATE:SSNUM:GENDER:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:BONUS:SIM_DEPT_DEPT_ID1'
+,p_report_columns=>'PERSON_ID:NAME:BIRTH_DATE:SSNUM:GENDER:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:BONUS:Department'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -8580,7 +8583,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150214232631'
+,p_last_upd_yyyymmddhh24miss=>'20150218025918'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545619190476640066)
@@ -8606,7 +8609,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select "PERSON_ID", ',
-'"NAME",',
+'SIM_PROJECT_EMPLOYEE."NAME",',
 '"BIRTH_DATE",',
 '"SSNUM",',
 '"GENDER",',
@@ -8620,8 +8623,9 @@ wwv_flow_api.create_page_plug(
 '"STATUS",',
 '"TITLE",',
 '"RATING",',
-'"SIM_DEPT_DEPT_ID"',
-'from "#OWNER#"."SIM_PROJECT_EMPLOYEE" ',
+'SIM_DEPT."NAME" AS "Department"',
+'from "#OWNER#"."SIM_PROJECT_EMPLOYEE" , SIM_DEPT',
+'WHERE SIM_PROJECT_EMPLOYEE.SIM_DEPT_DEPT_ID = SIM_DEPT.DEPT_ID',
 '  ',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
@@ -8780,12 +8784,12 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545644553758646606)
-,p_db_column_name=>'SIM_DEPT_DEPT_ID'
+ p_id=>wwv_flow_api.id(610571756706852171)
+,p_db_column_name=>'Department'
 ,p_display_order=>16
 ,p_column_identifier=>'P'
-,p_column_label=>'Sim Dept Dept Id'
-,p_column_type=>'NUMBER'
+,p_column_label=>'Department'
+,p_column_type=>'STRING'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_rpt(
@@ -8796,7 +8800,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'PERSON_ID:NAME:BIRTH_DATE:SSNUM:GENDER:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:RATING:SIM_DEPT_DEPT_ID'
+,p_report_columns=>'PERSON_ID:NAME:BIRTH_DATE:SSNUM:GENDER:ADDRESS:CITY:STATE:ZIP:EMP_ID:HIRE_DATE:SALARY:STATUS:TITLE:RATING:Department'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -9379,7 +9383,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150214232926'
+,p_last_upd_yyyymmddhh24miss=>'20150218024409'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545650794374650964)
@@ -9405,9 +9409,10 @@ wwv_flow_api.create_page_plug(
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
 'select "PROJECT_ID", ',
-'"NAME",',
-'"SIM_DEPT_DEPT_ID"',
-'from "#OWNER#"."SIM_PROJECT" ',
+'SIM_PROJECT."NAME",',
+'SIM_DEPT."NAME" AS "Department"',
+'from "#OWNER#"."SIM_PROJECT" , SIM_DEPT',
+'WHERE SIM_PROJECT.SIM_DEPT_DEPT_ID = SIM_DEPT.DEPT_ID',
 '  ',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
@@ -9449,12 +9454,12 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545663067000664112)
-,p_db_column_name=>'SIM_DEPT_DEPT_ID'
+ p_id=>wwv_flow_api.id(609544731776748308)
+,p_db_column_name=>'Department'
 ,p_display_order=>3
 ,p_column_identifier=>'C'
-,p_column_label=>'Sim Dept Dept Id'
-,p_column_type=>'NUMBER'
+,p_column_label=>'Department'
+,p_column_type=>'STRING'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_rpt(
@@ -9465,7 +9470,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'PROJECT_ID:NAME:SIM_DEPT_DEPT_ID'
+,p_report_columns=>'PROJECT_ID:NAME:Department'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
@@ -10187,7 +10192,7 @@ wwv_flow_api.create_page(
 ,p_cache_mode=>'NOCACHE'
 ,p_help_text=>'No help is available for this page.'
 ,p_last_updated_by=>'CASSIE@CS.UTEXAS.EDU'
-,p_last_upd_yyyymmddhh24miss=>'20150214234851'
+,p_last_upd_yyyymmddhh24miss=>'20150218030544'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(545687953686690863)
@@ -10212,10 +10217,12 @@ wwv_flow_api.create_page_plug(
 ,p_include_in_reg_disp_sel_yn=>'N'
 ,p_plug_display_point=>'BODY'
 ,p_plug_source=>wwv_flow_utilities.join(wwv_flow_t_varchar2(
-'select "ASSIGNMENT_ID", ',
-'"SIM_PERSON_PERSON_ID",',
-'"SIM_PROJECT_PROJECT_ID"',
-'from "#OWNER#"."SIM_ASSIGNMENTS" ',
+'select ',
+'SIM_PERSON."NAME" AS "Employee Name",',
+'SIM_PROJECT."NAME" AS "Project Name"',
+'from "#OWNER#"."SIM_ASSIGNMENTS" , SIM_PROJECT, SIM_PERSON',
+'WHERE SIM_ASSIGNMENTS.SIM_PROJECT_PROJECT_ID = SIM_PROJECT.PROJECT_ID',
+'AND SIM_ASSIGNMENTS.SIM_PERSON_PERSON_ID = SIM_PERSON.PERSON_ID',
 '  ',
 ''))
 ,p_plug_source_type=>'NATIVE_IR'
@@ -10239,30 +10246,21 @@ wwv_flow_api.create_worksheet(
 ,p_internal_uid=>545821981913793588
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545822051539793589)
-,p_db_column_name=>'ASSIGNMENT_ID'
-,p_display_order=>1
-,p_column_identifier=>'A'
-,p_column_label=>'Assignment Id'
-,p_column_type=>'NUMBER'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545822489309793590)
-,p_db_column_name=>'SIM_PERSON_PERSON_ID'
+ p_id=>wwv_flow_api.id(610044526107766536)
+,p_db_column_name=>'Employee Name'
 ,p_display_order=>2
 ,p_column_identifier=>'B'
-,p_column_label=>'Sim Person Person Id'
-,p_column_type=>'NUMBER'
+,p_column_label=>'Employee Name'
+,p_column_type=>'STRING'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(545822836356793591)
-,p_db_column_name=>'SIM_PROJECT_PROJECT_ID'
+ p_id=>wwv_flow_api.id(610044999782766537)
+,p_db_column_name=>'Project Name'
 ,p_display_order=>3
 ,p_column_identifier=>'C'
-,p_column_label=>'Sim Project Project Id'
-,p_column_type=>'NUMBER'
+,p_column_label=>'Project Name'
+,p_column_type=>'STRING'
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_rpt(
@@ -10273,7 +10271,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
 ,p_display_rows=>50
-,p_report_columns=>'ASSIGNMENT_ID:SIM_PERSON_PERSON_ID:SIM_PROJECT_PROJECT_ID'
+,p_report_columns=>'Employee Name:Project Name'
 ,p_flashback_enabled=>'N'
 );
 wwv_flow_api.create_page_button(
